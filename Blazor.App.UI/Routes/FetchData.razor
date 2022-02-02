@@ -1,0 +1,74 @@
+﻿@page "/fetchdata"
+@namespace Blazor.App.UI
+@implements IDisposable
+
+<PageTitle>Weather forecast</PageTitle>
+
+<h1>Weather forecast</h1>
+
+<p>This component demonstrates fetching data from a service.</p>
+<div class="m-2 p-2 text-end">
+    <button class="btn btn-sm btn-success" @onclick="this.AddRecord">Add Weather Forecast</button>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Temp. (C)</th>
+            <th>Temp. (F)</th>
+            <th>Summary</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <Virtualize Context="forecast" ItemsProvider="this.Service.GetPageAsync" @ref=virtualizeComponent>
+            <tr>
+                <td>@forecast.Date.ToShortDateString()</td>
+                <td>@forecast.TemperatureC</td>
+                <td>@forecast.TemperatureF()</td>
+                <td>@forecast.Summary</td>
+                <td>
+                    <button class="btn btn-sm btn-danger" @onclick="() => this.DeleteRecord(forecast.Id)">Delete</button>
+                </td>
+            </tr>
+        </Virtualize>
+    </tbody>
+</table>
+
+@code {
+
+    [Inject] private WeatherForcastListViewService? service { get; set; }
+    private WeatherForcastListViewService Service => service!;
+
+    [Inject] private WeatherForcastCrudViewService? crudService { get; set; }
+    private WeatherForcastCrudViewService CrudService => crudService!;
+
+    private Virtualize<DboWeatherForecast>? virtualizeComponent;
+
+    protected override void OnInitialized()
+        => this.Service.ListChanged += this.OnListChanged;
+
+    private async Task DeleteRecord(Guid Id)
+        => await this.CrudService.DeleteRecordAsync(Id);
+
+    private async Task AddRecord()
+    {
+        var record = new DboWeatherForecast
+            {
+                Id = Guid.NewGuid(),
+                Date = DateTime.Now,
+                TemperatureC = 20,
+                Summary = "Testing"
+            };
+        await this.CrudService.SaveRecordAsync(record);
+    }
+
+    private async void OnListChanged(object? sender, EventArgs e)
+    {
+        if (this.virtualizeComponent is not null)
+            await this.virtualizeComponent.RefreshDataAsync();
+    }
+
+    public void Dispose()
+        => this.Service.ListChanged -= this.OnListChanged;
+}
