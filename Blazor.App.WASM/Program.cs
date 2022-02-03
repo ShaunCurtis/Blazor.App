@@ -7,9 +7,13 @@ var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<Blazor.App.UI.App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 
-builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
-builder.Services.AddScoped<IWeatherForecastDataBroker, WeatherForecastAPIDataBroker>();
-builder.Services.AddScoped<WeatherForcastListViewService>();
-builder.Services.AddScoped<WeatherForcastCrudViewService>();
+// Configure the services container
+var services = builder.Services;
+{
+    services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+    services.AddScoped<IWeatherForecastDataBroker, WeatherForecastAPIDataBroker>();
+    services.AddScoped<WeatherForcastListViewService>();
+    services.AddScoped<WeatherForcastCrudViewService>();
+}
 
 await builder.Build().RunAsync();
