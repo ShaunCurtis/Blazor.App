@@ -31,5 +31,8 @@ public class WeatherForcastListViewService
     }
 
     public void NotifyListChanged(object? sender, EventArgs e)
-        => this.ListChanged?.Invoke(this, EventArgs.Empty);
+    {
+        Console.WriteLine($"NotifyListChanged");
+        this.ListChanged?.Invoke(this, EventArgs.Empty);
+    }
 }

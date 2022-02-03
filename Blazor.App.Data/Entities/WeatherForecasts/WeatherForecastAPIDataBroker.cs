@@ -20,7 +20,7 @@ public class WeatherForecastAPIDataBroker : IWeatherForecastDataBroker
 
     public async ValueTask<DboWeatherForecast> GetWeatherForecastAsync(Guid id)
     {
-        var response = await this.HttpClient.PostAsJsonAsync($"/api/weatherforecast/read", id);
+        var response = await this.HttpClient.PostAsJsonAsync($"/api/weatherforecast/get", id);
         var result = await response.Content.ReadFromJsonAsync<DboWeatherForecast>();
         result ??= new DboWeatherForecast();
         return result;

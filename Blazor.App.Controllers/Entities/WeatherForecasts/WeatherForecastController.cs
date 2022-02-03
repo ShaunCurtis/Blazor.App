@@ -21,7 +21,7 @@ public class WeatherForecastController : Controller
         => await DataService.GetWeatherForecastCountAsync();
 
     [MVC.Route("/api/weatherforecast/get")]
-    [HttpGet]
+    [HttpPost]
     public async Task<DboWeatherForecast> GetRec(Guid id)
         => await DataService.GetWeatherForecastAsync(id);
 

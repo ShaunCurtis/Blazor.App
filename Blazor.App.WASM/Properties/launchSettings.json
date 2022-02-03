@@ -8,7 +8,7 @@
     }
   },
   "profiles": {
-    "BlazorApp.Test1.Server": {
+    "Blazor.App.WASM": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,

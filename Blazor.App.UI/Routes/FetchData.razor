@@ -67,6 +67,7 @@
     {
         if (this.virtualizeComponent is not null)
             await this.virtualizeComponent.RefreshDataAsync();
+        await this.InvokeAsync(StateHasChanged);
     }
 
     public void Dispose()
