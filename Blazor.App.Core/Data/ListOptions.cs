@@ -2,8 +2,8 @@
 
 public class ListOptions
 {
-    public int StartRecord { get; set; }
+    public int StartRecord { get; set; } = 0;
 
-    public int PageSize { get; set; } = 10;
+    public int PageSize { get; set; } = 1000;
 }
 

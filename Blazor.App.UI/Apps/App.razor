@@ -1,6 +1,6 @@
 ﻿@namespace Blazor.App.UI
-
-<Router AppAssembly="@typeof(App).Assembly">
+@using System.Reflection
+<Router AppAssembly="@typeof(Blazor.App.UI.App).Assembly">
     <Found Context="routeData">
         <RouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
         <FocusOnNavigate RouteData="@routeData" Selector="h1" />

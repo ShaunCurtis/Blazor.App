@@ -2,7 +2,7 @@ namespace Blazor.App.Core;
 
 public record DboWeatherForecast
 {
-    public Guid Id { get; init; } = Guid.Empty;
+    public Guid WeatherForecastId { get; init; } = Guid.Empty;
 
     public DateTime Date { get; init; }
 

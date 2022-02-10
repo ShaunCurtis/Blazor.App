@@ -28,7 +28,7 @@
                 <td>@forecast.TemperatureF()</td>
                 <td>@forecast.Summary</td>
                 <td>
-                    <button class="btn btn-sm btn-danger" @onclick="() => this.DeleteRecord(forecast.Id)">Delete</button>
+                    <button class="btn btn-sm btn-danger" @onclick="() => this.DeleteRecord(forecast.WeatherForecastId)">Delete</button>
                 </td>
             </tr>
         </Virtualize>
@@ -43,10 +43,13 @@
     [Inject] private WeatherForcastCrudViewService? crudService { get; set; }
     private WeatherForcastCrudViewService CrudService => crudService!;
 
+    [Inject] private WeatherForecastNotificationService? notificationService { get; set; }
+    private WeatherForecastNotificationService NotificationService => notificationService!;
+
     private Virtualize<DboWeatherForecast>? virtualizeComponent;
 
     protected override void OnInitialized()
-        => this.Service.ListChanged += this.OnListChanged;
+        => this.NotificationService.RecordSetChanged += this.OnListChanged;
 
     private async Task DeleteRecord(Guid Id)
         => await this.CrudService.DeleteRecordAsync(Id);
@@ -55,7 +58,7 @@
     {
         var record = new DboWeatherForecast
             {
-                Id = Guid.NewGuid(),
+                WeatherForecastId = Guid.NewGuid(),
                 Date = DateTime.Now,
                 TemperatureC = 20,
                 Summary = "Testing"
@@ -63,7 +66,7 @@
         await this.CrudService.SaveRecordAsync(record);
     }
 
-    private async void OnListChanged(object? sender, EventArgs e)
+    private async void OnListChanged(object? sender, RecordSetChangedEventArgs e)
     {
         if (this.virtualizeComponent is not null)
             await this.virtualizeComponent.RefreshDataAsync();
@@ -71,5 +74,5 @@
     }
 
     public void Dispose()
-        => this.Service.ListChanged -= this.OnListChanged;
+        => this.NotificationService.RecordSetChanged -= this.OnListChanged;
 }

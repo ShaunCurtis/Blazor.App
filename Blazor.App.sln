@@ -14,15 +14,16 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{94172726-7AFF-435F-B900-540439C6FB30}"
 	ProjectSection(SolutionItems) = preProject
 		readme.md = readme.md
+		workingArticle.md = workingArticle.md
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazor.App.Test", "Blazor.App.Test\Blazor.App.Test.csproj", "{EC7FF222-9BAC-4D22-A339-61D4A6122098}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazor.App.Controllers", "Blazor.App.Controllers\Blazor.App.Controllers.csproj", "{57DA4B80-F60D-462B-97F0-C717C7F92072}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blazor.App.WASM", "Blazor.App.WASM\Blazor.App.WASM.csproj", "{72F65ACF-2EB6-4703-9F2C-677E1C6E2C1E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazor.App.WASM", "Blazor.App.WASM\Blazor.App.WASM.csproj", "{72F65ACF-2EB6-4703-9F2C-677E1C6E2C1E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blazor.App.WASM.Web", "Blazor.App.WASM.Web\Blazor.App.WASM.Web.csproj", "{D7F4E846-C05B-4AC8-A488-5FA610F6BD61}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazor.App.WASM.Web", "Blazor.App.WASM.Web\Blazor.App.WASM.Web.csproj", "{D7F4E846-C05B-4AC8-A488-5FA610F6BD61}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -10,6 +10,7 @@ var services = builder.Services;
     services.AddServerSideBlazor();
     services.AddSingleton<WeatherDataStore>();
     services.AddSingleton<IWeatherForecastDataBroker, WeatherForecastServerDataBroker>();
+    services.AddSingleton<WeatherForecastNotificationService>();
     services.AddScoped<WeatherForcastListViewService>();
     services.AddScoped<WeatherForcastCrudViewService>();
 }

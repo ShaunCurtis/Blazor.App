@@ -10,8 +10,7 @@ public class DataBrokerTests
     {
         //Define
         WeatherDataStore dataStore = new WeatherDataStore();
-        IWeatherForecastDataBroker? _dataBroker = new WeatherForecastServerDataBroker(dataStore) as IWeatherForecastDataBroker;
-        IWeatherForecastDataBroker? dataBroker = _dataBroker!;
+        IWeatherForecastDataBroker? dataBroker = new WeatherForecastServerDataBroker(dataStore) as IWeatherForecastDataBroker;
         var listOptions = new ListOptions { PageSize = pageSize, StartRecord = startRecord };
 
         //Test
@@ -26,12 +25,11 @@ public class DataBrokerTests
     {
         //Define
         WeatherDataStore dataStore = new WeatherDataStore();
-        IWeatherForecastDataBroker? _dataBroker = new WeatherForecastServerDataBroker(dataStore) as IWeatherForecastDataBroker;
-        IWeatherForecastDataBroker? dataBroker = _dataBroker!;
+        IWeatherForecastDataBroker? dataBroker = new WeatherForecastServerDataBroker(dataStore) as IWeatherForecastDataBroker;
 
         var listOptions = new ListOptions { PageSize = 1000, StartRecord = 0 };
         var id = Guid.NewGuid();
-        var newRecord = new DboWeatherForecast() { Date = DateTime.Now, Id = id, Summary = "Testing", TemperatureC = 20 };
+        var newRecord = new DboWeatherForecast() { Date = DateTime.Now, WeatherForecastId = id, Summary = "Testing", TemperatureC = 20 };
 
         //Test
         var result = await dataBroker.SaveWeatherForecastAsync(newRecord);
@@ -49,15 +47,14 @@ public class DataBrokerTests
     {
         //Define
         WeatherDataStore dataStore = new WeatherDataStore();
-        IWeatherForecastDataBroker? _dataBroker = new WeatherForecastServerDataBroker(dataStore) as IWeatherForecastDataBroker;
-        IWeatherForecastDataBroker? dataBroker = _dataBroker!;
+        IWeatherForecastDataBroker? dataBroker = new WeatherForecastServerDataBroker(dataStore) as IWeatherForecastDataBroker;
 
         var listOptions = new ListOptions { PageSize = 1000, StartRecord = 0 };
 
         var list = await dataBroker.GetWeatherForecastsAsync(listOptions);
 
         var record = list[10];
-        var id = record.Id;
+        var id = record.WeatherForecastId;
 
         //Test
         var result = await dataBroker.DeleteWeatherForecastAsync(id);

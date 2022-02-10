@@ -12,6 +12,7 @@ var services = builder.Services;
 {
     services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
     services.AddScoped<IWeatherForecastDataBroker, WeatherForecastAPIDataBroker>();
+    services.AddSingleton<WeatherForecastNotificationService>();
     services.AddScoped<WeatherForcastListViewService>();
     services.AddScoped<WeatherForcastCrudViewService>();
 }
